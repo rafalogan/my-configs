@@ -1,3 +1,10 @@
+# Ide Folders #
+###############
+\.idea
+\.vscode
+.idea
+.vscode
+
 # Compiled source #
 ###################
 *.com
