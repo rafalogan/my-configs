@@ -1,0 +1,199 @@
+{
+  "workbench.colorTheme": "Material Theme Ocean High Contrast",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.fontFamily": "Fira Code, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "["javascript"]": {
+   "editor.formatOnSave": true
+ }
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.fixAll.tslint": true
+  },
+  "terminal.integrated.fontFamily": "Fira Code",
+  "workbench.colorCustomizations": {
+    "terminal.background": "#000000",
+    "editor.background": "#000000",
+    "editor.lineHighlightBackground": "#282828",
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "editor.tokenColorCustomizations": {
+    "functions": "#327BFF",
+    "comments": "#808080",
+    "keywords": "#FF55FF",
+    "strings": {
+      "fontStyle": "italic",
+      "foreground": "#FF0013"
+    },
+    "numbers": "#F7001C",
+    "variables": "#ffffff",
+    "types": "#FF55FF",
+    "textMateRules": [
+      {
+        "scope": "punctuation",
+        "settings": {
+          "foreground": "#89DDFF",
+        }
+      },
+      {
+        "scope": "meta",
+        "settings": {
+          "foreground": "#5555FF",
+        }
+      },
+      {
+        "scope": "entity.name.function",
+        "settings": {
+          "foreground": "#5555FF"
+        }
+      },
+      {
+        "scope": "entity.name.type.interface",
+        "settings": {
+          "foreground": "#BB0070",
+        }
+      },
+      {
+        "scope": "entity.name.type.class",
+        "settings": {
+          "foreground": "#00e676",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "constant",
+        "settings": {
+          "foreground": "#f50057"
+        }
+      },
+      {
+        "scope": "keyword.operator.new",
+        "settings": {
+          "foreground": "#dd33fa",
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": "variable.language.this",
+        "settings": {
+          "foreground": "#FF0000"
+        }
+      },
+      {
+        "scope": "variable.parameter",
+        "settings": {
+          "foreground": "#00F7F1"
+        }
+      },
+      {
+        "scope": "constant.language.boolean",
+        "settings": {
+          "foreground": "#e91e63"
+        }
+      },
+      {
+        "scope": "variable.other.readwrite.alias.ts",
+        "settings": {
+          // "foreground": "#00e676"
+        }
+      },
+      {
+        "scope": "entity.other.attribute-name.class.css",
+        "settings": {
+          "foreground": "#ff55ff"
+        }
+      },
+      {
+        "scope": "support.constant.property-value.css",
+        "settings": {
+          "foreground": "#FF0000"
+        }
+      },
+      {
+        "scope": "keyword.other",
+        "settings": {
+          "foreground": "#5555FF",
+        }
+      },
+      {
+        "scope": "source.css entity.name.tag",
+        "settings": {
+          "foreground": "#92A4FF",
+        }
+      },
+      {
+        "scope": "entity.name.tag.html",
+        "settings": {
+          "foreground": "#92A4FF"
+        }
+      },
+      {
+        "scope": "entity.other.attribute-name.html",
+        "settings": {
+          "foreground": "#0075FF"
+        }
+      }
+    ]
+  },
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.acceptSuggestionOnEnter": "on",
+  "editor.quickSuggestionsDelay": 10,
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.wordBasedSuggestions": true,
+  "editor.parameterHints.enabled": true,
+  "editor.autoIndent": "advanced",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "git.enableSmartCommit": true,
+  "todo-tree.tree.showScanModeButton": false,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "choseToUpdateConfiguration",
+  "cSpell.enabled": true,
+  "cSpell.language": "en,pt,pt_BR",
+  "sync.gist": "e08ad8bb04b3db0c79869ce98c3d633c",
+  "sync.quietSync": true,
+  "sync.autoDownload": true,
+  "sync.autoUpload": true,
+  "cSpell.userWords": [
+    "Controller",
+    "signin",
+    "signup"
+  ],
+  "tabnine.experimentalAutoImports": true,
+  "diffEditor.codeLens": true,
+  "vs-kubernetes": {
+    "vscode-kubernetes.helm-path.mac": "/Users/rafaelcandeira/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+    "vscode-kubernetes.minikube-path.mac": "/Users/rafaelcandeira/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+    "vscode-kubernetes.kubectl-path.mac": "/Users/rafaelcandeira/.vs-kubernetes/tools/kubectl/kubectl"
+  },
+  "workbench.editor.enablePreview": false,
+  "redhat.telemetry.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "code-runner.clearPreviousOutput": true,
+  "settingsSync.ignoredSettings": [
+    "workbench.settings.editor"
+  ]
+}
