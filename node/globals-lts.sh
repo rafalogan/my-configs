@@ -28,6 +28,16 @@ DIRECT_PLUGINS=(
 ########################
 # NATIVESCIRPT_ENV="${0%/*}/nativescript-env.sh"
 
+# Install or update pnpm #
+##########################
+if (! pnpm --version ); then
+  echo "Instalando - pnpm" &&
+    npm i -g pnpm
+ else
+    echo "Atulaizando - pnpm" &&
+      npm up -g pnpm
+fi
+
 # Install or update Typescript #
 ################################
 if ( ! tsc --version ); then

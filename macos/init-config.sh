@@ -32,4 +32,4 @@ openssl version -a
 
 # End init configs #
 ####################
-echo "if ned mv /usr/bin/openssl /usr/bin/openssl_OLD"
+echo "if need user command  mv /usr/bin/openssl /usr/bin/openssl_OLD  to craarte old oppenssl" 

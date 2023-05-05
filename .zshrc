@@ -129,6 +129,12 @@ SPACESHIP_PROMPT_ORDER=(
   exit_code     # Exit code section
   char          # Prompt character
 )
+# SPACESHIP_USER_SHOW=always
+# SPACESHIP_PROMPT_ADD_NEWLINE=false
+# SPACESHIP_CHAR_SYMBOL="❯"
+# # SPACESHIP_CHAR_SYMBOL="\uf296"
+# SPACESHIP_CHAR_SUFFIX=" "
+# ## Comfiguration SPACESHIP PROMPT
 
 # NVM configs Start ##
 ## This Autoload nvmrc start ##
@@ -160,6 +166,11 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 # This Autoload nvmrc End ##
 # NVM configs End ##
+
+# rvm source
+if [ -d "$HOME/.rvm" ]; then
+  source $HOME/.rvm/scripts/rvm
+fi  
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -200,3 +211,15 @@ alias bat=" bat --style=auto"
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+#pyenv install 3:latest export PATH="$(pyenv root)/shims:$PATH"
+
+
+# Pyenv on PATH
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$HOME/.rvm/bin:$PATH"
+export PATH="$HOME/.rvm/gems/ruby-3.0.0/bin:$PATH"
