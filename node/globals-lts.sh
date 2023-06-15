@@ -22,6 +22,7 @@ DIRECT_PLUGINS=(
 	prettier
 	stylelint
 	write-good
+  heroku
 )
 
 # Nativescript Install #

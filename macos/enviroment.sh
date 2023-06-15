@@ -39,10 +39,10 @@ CASKS=(
 	twitch
 	robo-3t
 	4k-video-downloader
-	android-sdk
+	# android-sdk
 	firefox-developer-edition
 	sequel-pro-nightly
-	webtorrent
+	# webtorrent
 	# forticlient
 	mysqlworkbench
 	# signal
@@ -58,10 +58,8 @@ CASKS=(
 	postman
 	vlc
   figma
-  github
-  font-droid-sans-mono-nerd-font
+  # github
   font-fira-code-nerd-font
-  font-fira-mono-nerd-font
   font-hack-nerd-font
   font-meslo-lg-nerd-font
   free-download-manager
@@ -69,6 +67,12 @@ CASKS=(
   microsoft-teams
   anydesk
 )
+
+# Install brew taps #
+####################
+brew tap homebrew/cask-versions &&
+  brew tap homebrew/cask-fonts
+
 
 # Install Git #
 ####################

@@ -10,7 +10,6 @@ VUE="@vue/cli"
 DIRECT_PLUGINS=(
   knex
   ipt
-	heroku
 	npmrc
 	verdaccio
 	fkill
