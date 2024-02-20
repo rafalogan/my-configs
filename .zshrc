@@ -1,7 +1,10 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+eval "$(/usr/local/bin/brew shellenv)"
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
@@ -108,7 +111,7 @@ source $ZSH/oh-my-zsh.sh
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# For a gull list of active aliases, run `alias`.
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -203,14 +206,19 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 # LunarVim
 export PATH=$HOME/.local/bin:$PATH
-# alieas
-alias ls="exa --icons"
-alias bat=" bat --style=auto"
+# aliases
+if [ -f "$HOME/.zsh_aliases" ]; then
+  . "$HOME/.zsh_aliases"
+fi
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+# Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+# Cago end
 
 #pyenv install 3:latest export PATH="$(pyenv root)/shims:$PATH"
 
@@ -223,3 +231,20 @@ eval "$(pyenv init -)"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$HOME/.rvm/bin:$PATH"
 export PATH="$HOME/.rvm/gems/ruby-3.0.0/bin:$PATH"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+
+
+# bun completions
+[ -s "/Users/rafaelcandeira/.bun/_bun" ] && source "/Users/rafaelcandeira/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bum
+export BUM_INSTALL="$HOME/.bum"
+export PATH="$BUM_INSTALL/bin:$PATH"
