@@ -2,32 +2,35 @@
 # Variables
 # indirect plugins
 ####################
-TYPESCRIPT="typescript"
 ANGULAR="@angular/cli"
+NESTJS="@nestjs/cli"
 IONIC="@ionic/cli"
+TYPESCRIPT="typescript"
 IONIC_DEPS=(
 	cordova
 	native-run
 	cordova-res
 )
 
+
+
+
 # Direct Plugins npm #
 ######################
 DIRECT_PLUGINS=(
-	eslint
   pm2
-	tree-sitter-cli
-	eslint_d
-	markdownlint-cli
-	prettier
-	stylelint
-	write-good
   heroku
 )
+
+NVIM="${0%/*}/lvim-node-module.sh"
 
 # Nativescript Install #
 ########################
 # NATIVESCIRPT_ENV="${0%/*}/nativescript-env.sh"
+
+# Install NVIM DEPS #
+####################
+zsh "$NVIM"
 
 # Install or update pnpm #
 ##########################
@@ -51,12 +54,23 @@ fi
 
 # Install or update Angular/cli #
 #################################
-if ( ! ng --version ); then
+if ( ! ng version ); then
   echo "Instalando - $ANGULAR" &&
 	npm i -g $ANGULAR
 else
   echo "Atualizando - $ANGULAR" &&
-  npm i -g $ANGULAR@latest
+  npm up -g $ANGULAR
+fi
+
+# Install or update Nestjs/cli #
+#################################
+if ( ! nest -v ); then
+  echo "Instalando - $NESTJS" &&
+	npm i -g $NESTJS
+else
+  echo "Atualizando - $NESTJS" &&
+  npm up -g $NESTJS
+
 fi
 
 # Install Nativescript #

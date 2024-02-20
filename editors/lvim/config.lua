@@ -1,4 +1,5 @@
 -- Read the docs: https://www.lunarvim.org/docs/configuration
+-- Example configs: https://github.com/LunarVim/starter.lvim
 -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
@@ -23,6 +24,7 @@ vim.opt.relativenumber = true
 -- vim.opt.shell = "/bin/sh"
 vim.opt.smartindent = true
 vim.opt.smartcase = true
+vim.opt.termguicolors = true
 
 -- use treesitter folding
 -- vim.opt.foldmethod = "expr"
@@ -30,7 +32,7 @@ vim.opt.smartcase = true
 
 -- general
 lvim.log.level = "info"
-lvim.format_on_save = true
+lvim.format_on_save.enabled = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -57,7 +59,7 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 
 -- -- Change theme settings
-lvim.colorscheme = "lunar"
+lvim.colorscheme = "tokyonight"
 lvim.transparent_window = true
 
 local function os_icon()
@@ -89,8 +91,9 @@ lvim.builtin.cmp.completion.keyword_length = 2
 -- telescope configs
 lvim.builtin.telescope.defaults.initial_mode = "insert"
 lvim.builtin.telescope.defaults.layout_config.prompt_position = "bottom"
-lvim.builtin.telescope.defaults.layout_config.width = 0.75
+lvim.builtin.telescope.defaults.layout_config.width = 0.95
 lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
+lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
 
 -- lvim.builtin.telescope.defaults.layout_config.width = 0.95
 
@@ -122,10 +125,16 @@ lvim.builtin.lualine.inactive_sections.lualine_x = { components.location }
 -- -- generic LSP settings <https://www.lunarvim.org/docs/languages#lsp-support>
 
 -- --- disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = true
+-- lvim.lsp.installer.setup.automatic_installation.enable = true
 
 -- nvim-ts-rainbow rainbow parentheses
 lvim.builtin.treesitter.rainbow.enable = true
+
+-- active neo tree
+-- lvim.builtin.nvimtree.active = false
+
+-- enable treesitter integration
+lvim.builtin.treesitter.matchup.enable = true
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
@@ -185,7 +194,6 @@ null_ls.setup({
 
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-  { command = "stylua" },
   -- {
   --     command = "prettier",
   --     extra_args = { "--print-with", "100" },
@@ -199,7 +207,9 @@ formatters.setup({
   --     },
   -- },
   {
-    exe = "prettier",
+    name = "prettier",
+
+    args = { "--print-with", "140" },
     filetypes = {
       "css",
       "graphql",
@@ -231,11 +241,11 @@ formatters.setup({
       single_quote = true,
       tab_width = 2,
       use_tabs = true,
-      trailing_comma = "es5",
+      trailing_comma = "esnext",
       vue_indent_script_and_style = false,
-      editorconfig = true,
+      --editorconfig = true
     },
-  },
+  }
 })
 
 local linters = require("lvim.lsp.null-ls.linters")
@@ -245,16 +255,16 @@ linters.setup({
     command = "shellcheck",
     args = { "--severity", "warning" },
   },
-  -- {
-  --     command = "eslint",
-  --     filetypes = {
-  --         "javascriptreact",
-  --         "javascript",
-  --         "typescriptreact",
-  --         "typescript",
-  --         "vue",
-  --     },
-  -- },
+  {
+    command = "eslint",
+    filetypes = {
+      "javascriptreact",
+      "javascript",
+      "typescriptreact",
+      "typescript",
+      "vue",
+    },
+  },
   {
     exe = "eslint",
     filetypes = {
@@ -267,14 +277,17 @@ linters.setup({
   },
 })
 
+--install telescope
+lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "frecency")
+  pcall(telescope.load_extension, "neoclip")
+  -- any other extensions loading
+end
+
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 lvim.plugins = {
+  { "nvim-treesitter" },
   { "lunarvim/colorschemes" },
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  { "mattn/emmet-vim" },
   { "WhoIsSethDaniel/lualine-lsp-progress.nvim" },
   { "rcarriga/nvim-notify" },
   { "matze/vim-move" },
@@ -372,9 +385,27 @@ lvim.plugins = {
   },
   {
     "tzachar/cmp-tabnine",
-    run = "./install.sh",
-    requires = "hrsh7th/nvim-cmp",
+    build = "./install.sh",
+    dependencies = "hrsh7th/nvim-cmp",
     event = "InsertEnter",
+  },
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      require('goto-preview').setup {
+        width = 120,              -- Width of the floating window
+        height = 25,              -- Height of the floating window
+        default_mappings = false, -- Bind default mappings
+        debug = false,            -- Print debug information
+        opacity = nil,            -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        post_open_hook = nil      -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        -- You can use "default_mappings = true" setup option
+        -- Or explicitly set keybindings
+        -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+        -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+        -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+      }
+    end
   },
   {
     "ray-x/lsp_signature.nvim",
@@ -390,6 +421,10 @@ lvim.plugins = {
     end,
   },
   {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  {
     "Pocco81/auto-save.nvim",
     config = function()
       require("auto-save").setup()
@@ -399,11 +434,25 @@ lvim.plugins = {
     "metakirby5/codi.vim",
     cmd = "Codi",
   },
+  { "oberblastmeister/neuron.nvim" },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
     config = function()
       require("todo-comments").setup()
+    end,
+  },
+  {
+    "ethanholz/nvim-lastplace",
+    event = "BufRead",
+    config = function()
+      require("nvim-lastplace").setup({
+        lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+        lastplace_ignore_filetype = {
+          "gitcommit", "gitrebase", "svn", "hgcommit",
+        },
+        lastplace_open_folds = true,
+      })
     end,
   },
   {
@@ -420,20 +469,68 @@ lvim.plugins = {
     end,
   },
   {
-    "turbio/bracey.vim",
-    cmd = { "Bracey", "BracyStop", "BraceyReload", "BraceyEval" },
-    run = "npm install --prefix server",
+    'wfxr/minimap.vim',
+    build = "cargo install --locked code-minimap",
+    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+    config = function()
+      vim.cmd("let g:minimap_width = 10")
+      vim.cmd("let g:minimap_auto_start = 1")
+      vim.cmd("let g:minimap_auto_start_win_enter = 1")
+    end,
   },
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
+    "aca/emmet-ls",
+    config = function()
+      local lspconfig = require("lspconfig")
+      local configs = require("lspconfig/configs")
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {
+          "documentation",
+          "detail",
+          "additionalTextEdits",
+        },
+      }
+
+      if not lspconfig.emmet_ls then
+        configs.emmet_ls = {
+          default_config = {
+            cmd = { "emmet-ls", "--stdio" },
+            filetypes = {
+              "html",
+              "css",
+              "javascript",
+              "typescript",
+              "eruby",
+              "typescriptreact",
+              "javascriptreact",
+              "svelte",
+              "vue",
+              "twig",
+              "ejs",
+              "scss",
+              "less",
+              "hbs"
+            },
+            root_dir = function(fname)
+              return vim.loop.cwd()
+            end,
+            settings = {},
+          },
+        }
+      end
+      lspconfig.emmet_ls.setup({ capabilities = capabilities })
+    end,
   },
+  { "github/copilot.vim" },
+  { "nvim-treesitter/nvim-treesitter-angular" }
 }
 
+
 -- Lua
-vim.cmd [[colorscheme tokyonight]]
+-- vim.cmd [[colorscheme tokyonight]]
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
@@ -461,3 +558,33 @@ require("nvim-web-devicons").set_icon({
 
 -- Angular Plugins
 require("lvim.lsp.manager").setup("angularls")
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "angularls" })
+
+-- prettier
+require("lvim.lsp.manager").setup("tailwindcss")
+
+-- vim.tbl_map(function(server)
+--   return server ~= "emmet_ls"
+-- end,
+-- lvim.lsp.automatic_configuration.skipped_servers)
+--
+-- Below config is required to prevent copilot overriding Tab with a suggestion
+-- when you're just trying to indent!
+
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
+local cmp = require "cmp"
+
+lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  else
+    local copilot_keys = vim.fn["copilot#Accept"]()
+    if copilot_keys ~= "" then
+      vim.api.nvim_feedkeys(copilot_keys, "i", true)
+    else
+      fallback()
+    end
+  end
+end
