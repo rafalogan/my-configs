@@ -59,12 +59,9 @@ CASKS=(
 	vlc
   figma
   # github
-  font-fira-code-nerd-font
-  font-hack-nerd-font
-  font-meslo-lg-nerd-font
   free-download-manager
   spotify
-  microsoft-teams
+  #microsoft-teams
   anydesk
 )
 

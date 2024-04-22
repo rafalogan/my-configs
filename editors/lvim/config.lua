@@ -98,7 +98,7 @@ lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
 -- lvim.builtin.telescope.defaults.layout_config.width = 0.95
 
 -- Automatically install missing parsers when entering buffer
-lvim.builtin.treesitter.auto_install = true
+-- lvim.builtin.treesitter.auto_install = true
 
 lvim.builtin.breadcrumbs.active = true
 
@@ -134,7 +134,7 @@ lvim.builtin.treesitter.rainbow.enable = true
 -- lvim.builtin.nvimtree.active = false
 
 -- enable treesitter integration
-lvim.builtin.treesitter.matchup.enable = true
+-- lvim.builtin.treesitter.matchup.enable = true
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
