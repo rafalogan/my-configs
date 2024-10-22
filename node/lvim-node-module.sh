@@ -11,7 +11,7 @@ PLUGINS=(
   prettier
   stylelint
   write-good
-  # emmet-ls
+  emmet-ls
 )
 
 TYPESCRIPT="typescript"
