@@ -100,7 +100,7 @@ lvim.builtin.telescope.defaults.layout_config.preview_cutoff = 75
 -- Automatically install missing parsers when entering buffer
 -- lvim.builtin.treesitter.auto_install = true
 
-lvim.builtin.breadcrumbs.active = true
+-- lvim.builtin.breadcrumbs.active = true
 
 -- lvim.builtin.treesitter.ignore_install = { "haskell" }
 
@@ -128,9 +128,10 @@ lvim.builtin.lualine.inactive_sections.lualine_x = { components.location }
 -- lvim.lsp.installer.setup.automatic_installation.enable = true
 
 -- nvim-ts-rainbow rainbow parentheses
-lvim.builtin.treesitter.rainbow.enable = true
+-- lvim.builtin.treesitter.rainbow.enable = true
 
 -- active neo tree
+--
 -- lvim.builtin.nvimtree.active = false
 
 -- enable treesitter integration
@@ -190,25 +191,17 @@ null_ls.setup({
       end, { buffer = bufnr, desc = "[lsp] format" })
     end
   end,
+
+  sources = {
+    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.formatting.prettier,
+  }
 })
 
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-  -- {
-  --     command = "prettier",
-  --     extra_args = { "--print-with", "100" },
-  --     filetypes = {
-  --         "javascriptreact",
-  --         "javascript",
-  --         "typescriptreact",
-  --         "typescript",
-  --         "json",
-  --         "markdown",
-  --     },
-  -- },
   {
     name = "prettier",
-
     args = { "--print-with", "140" },
     filetypes = {
       "css",
@@ -225,6 +218,7 @@ formatters.setup({
       "yaml",
     },
     cli_options = {
+      usefiles = true,
       arrow_parens = "avoid",
       bracket_spacing = true,
       bracket_same_line = false,
@@ -233,7 +227,7 @@ formatters.setup({
       html_whitespace_sensitivity = "css",
       -- jsx_bracket_same_line = false,
       jsx_single_quote = false,
-      print_width = 120,
+      print_width = 140,
       prose_wrap = "preserve",
       quote_props = "as-needed",
       semi = true,
@@ -241,11 +235,11 @@ formatters.setup({
       single_quote = true,
       tab_width = 2,
       use_tabs = true,
-      trailing_comma = "esnext",
+      trailing_comma = "all",
       vue_indent_script_and_style = false,
       --editorconfig = true
     },
-  }
+  },
 })
 
 local linters = require("lvim.lsp.null-ls.linters")
@@ -288,7 +282,7 @@ end
 lvim.plugins = {
   { "nvim-treesitter" },
   { "lunarvim/colorschemes" },
-  { "WhoIsSethDaniel/lualine-lsp-progress.nvim" },
+  -- { "WhoIsSethDaniel/lualine-lsp-progress.nvim" },
   { "rcarriga/nvim-notify" },
   { "matze/vim-move" },
   { "voldikss/vim-floaterm" },
@@ -361,9 +355,6 @@ lvim.plugins = {
     config = function()
       require("nvim-ts-autotag").setup()
     end,
-  },
-  {
-    "p00f/nvim-ts-rainbow",
   },
   {
     "folke/lsp-colors.nvim",
@@ -469,16 +460,6 @@ lvim.plugins = {
     end,
   },
   {
-    'wfxr/minimap.vim',
-    build = "cargo install --locked code-minimap",
-    -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
-    config = function()
-      vim.cmd("let g:minimap_width = 10")
-      vim.cmd("let g:minimap_auto_start = 1")
-      vim.cmd("let g:minimap_auto_start_win_enter = 1")
-    end,
-  },
-  {
     "aca/emmet-ls",
     config = function()
       local lspconfig = require("lspconfig")
@@ -525,7 +506,22 @@ lvim.plugins = {
     end,
   },
   { "github/copilot.vim" },
-  { "nvim-treesitter/nvim-treesitter-angular" }
+  { "nvim-treesitter/nvim-treesitter-angular" },
+  { "rafamadriz/friendly-snippets" },
+  -- {
+  --   "HiPhish/nvim-ts-rainbow2",
+  --   setup = function()
+  --     require("nvim-treesitter.configs").setup({
+  --       rainbow = {
+  --         enable = true,
+  --         extended_mode = true,  -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+  --         max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
+  --         query = 'rainbow-parens',
+  --         strategy = require("ts-rainbow").strategy.global,
+  --       },
+  --     })
+  --   end,
+  -- }
 }
 
 
@@ -559,6 +555,18 @@ require("nvim-web-devicons").set_icon({
 -- Angular Plugins
 require("lvim.lsp.manager").setup("angularls")
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "angularls" })
+
+-- Configuração para Angular Language Server
+local lspconfig = require("lspconfig")
+lspconfig.angularls.setup({
+  on_attach = function(client, bufnr)
+    -- Configurações adicionais
+  end,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  root_dir = lspconfig.util.root_pattern("angular.json"),
+})
 
 -- prettier
 require("lvim.lsp.manager").setup("tailwindcss")
