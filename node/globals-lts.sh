@@ -12,14 +12,12 @@ IONIC_DEPS=(
 	cordova-res
 )
 
-
-
-
 # Direct Plugins npm #
 ######################
 DIRECT_PLUGINS=(
   pm2
   heroku
+  yarn
 )
 
 NVIM="${0%/*}/lvim-node-module.sh"

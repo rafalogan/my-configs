@@ -35,7 +35,7 @@ else
 fi
 
 # Install vue #
-###############
+############################
 if ( ! vue --version ); then
   echo "Instalando - $VUE" &&
 	npm i -g $VUE

@@ -3,7 +3,6 @@
 -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
---
 -- vim options
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
@@ -506,24 +505,24 @@ lvim.plugins = {
     end,
   },
   { "github/copilot.vim" },
+  { 'nvim-treesitter/nvim-treesitter' },
   { "nvim-treesitter/nvim-treesitter-angular" },
   { "rafamadriz/friendly-snippets" },
-  -- {
-  --   "HiPhish/nvim-ts-rainbow2",
-  --   setup = function()
-  --     require("nvim-treesitter.configs").setup({
-  --       rainbow = {
-  --         enable = true,
-  --         extended_mode = true,  -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-  --         max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-  --         query = 'rainbow-parens',
-  --         strategy = require("ts-rainbow").strategy.global,
-  --       },
-  --     })
-  --   end,
-  -- }
+  { "mrjones2014/nvim-ts-rainbow" },
 }
 
+require("nvim-treesitter.configs").setup {
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  }
+}
+
+require("toggleterm").setup {
+  size = 15,
+  direction = "horizontal",
+}
 
 -- Lua
 -- vim.cmd [[colorscheme tokyonight]]
@@ -596,3 +595,5 @@ lvim.builtin.cmp.mapping["<Tab>"] = function(fallback)
     end
   end
 end
+
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = true
