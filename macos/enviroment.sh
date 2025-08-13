@@ -14,10 +14,8 @@ FORMULAS=(
 	gnupg
 	jq
   jsonlint
-	nvm
 	tree
 	wget
-	svn
   azure-cli
   pyenv
   cmake
@@ -38,13 +36,13 @@ FORMULAS=(
 CASKS=(
 	twitch
 	robo-3t
-	4k-video-downloader
+	# 4k-video-downloader
 	# android-sdk
 	firefox-developer-edition
 	sequel-pro-nightly
 	# webtorrent
 	# forticlient
-	mysqlworkbench
+	# mysqlworkbench
 	# signal
 	zoom
 	adoptopenjdk8
@@ -59,10 +57,10 @@ CASKS=(
 	vlc
   figma
   # github
-  free-download-manager
+  # free-download-manager
   spotify
   #microsoft-teams
-  anydesk
+  # anydesk
 )
 
 # Install brew taps #
@@ -116,5 +114,5 @@ done
 
 # Update Homebrew and clear trash #
 ###################################
-brew update && brew upgrade && brew upgrade --casks --greedy;
+brew update && brew upgrade && brew upgrade --casks --greedy && brew cleanup;
 
